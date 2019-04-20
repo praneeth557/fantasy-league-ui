@@ -1,0 +1,14 @@
+.loginview {
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .loginview {
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+  }
+}

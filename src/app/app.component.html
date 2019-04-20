@@ -1,5 +1,5 @@
 
-<div class="row fantasy-wrapper">
+<div class="row fantasy-wrapper" *ngIf="isUserLoggedIn; else loginView">
   <nav class="col-xs-12 navbar navbar-inverse navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -23,6 +23,10 @@
     </div>
   </nav>
 </div>
+
+<ng-template #loginView>
+  <app-login></app-login>
+</ng-template>
 
 
 <router-outlet></router-outlet>
