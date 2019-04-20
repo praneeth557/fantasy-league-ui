@@ -1,0 +1,22 @@
+.fantasy-wrapper {
+  background-color: #EBEDEF;
+  height: 100%;
+}
+
+.navbar-inverse {
+  /*background-color: #2E4053 !important;*/
+  /*border-color: #212F3C;*/
+  color: #fafafa;
+  /*padding: 0 30px;*/
+}
+
+.navbar-brand {
+  color: #fafafa;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Helvetica;
+}
+
+.navbar-nav li a{
+  color: #fafafa;
+}
