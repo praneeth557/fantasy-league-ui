@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,6 +8,10 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { PointsSystemComponent } from './points-system/points-system.component';
+import { LoginService } from './shared/login.service'
+import { AppConstants } from './constants/app.constants'
+import { FormsModule } from "@angular/forms";
+import { AppSelectValidatorDirective } from './directives/app-select-validator.directive';
 
 @NgModule({
   declarations: [
@@ -14,13 +19,16 @@ import { PointsSystemComponent } from './points-system/points-system.component';
     LoginComponent,
     HomeComponent,
     LeaderboardComponent,
-    PointsSystemComponent
+    PointsSystemComponent,
+    AppSelectValidatorDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [AppConstants, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

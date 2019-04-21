@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AppConstants } from '../constants/app.constants'
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LoginService {
+
+  constructor(private http: HttpClient, private appConstants: AppConstants) { }
+
+  getSecurityQuestions() {
+    let url = this.appConstants.APP_URL + this.appConstants.GET_SECURITY_QUESTIONS_URL;
+    return this.http.get(url);
+  }
+
+  getSecurityAnswers(qid) {
+    let url = this.appConstants.APP_URL + this.appConstants.GET_SECURITY_ANSWERS_URL + "/" + qid;
+    return this.http.get(url);
+  }
+
+  createUser(regObj) {
+    let url = this.appConstants.APP_URL + this.appConstants.CREATE_USER;
+    return this.http.post(url, regObj);
+  }
+}
