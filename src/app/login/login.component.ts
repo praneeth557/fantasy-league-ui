@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit, OnChanges {
         (response:any) => {
           if(response && response.success) {
             this.isRegisterSuccess = true;
+            this.message = response.message;
             setTimeout(() => {
               this.isLoginView = true;
               this.isForgotPassword = false;
