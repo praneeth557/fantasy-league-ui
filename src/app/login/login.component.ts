@@ -6,6 +6,8 @@ import {Component,
 import { LoginService } from '../shared/login.service'
 import {NgForm} from "@angular/forms";
 import { CookieService } from 'ngx-cookie-service';
+import { AuthorizationService } from '../shared/authorization.service';
+
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,8 @@ export class LoginComponent implements OnInit, OnChanges {
   isLoginError:boolean = false;
 
   constructor(private loginService: LoginService,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private authorizationService: AuthorizationService) { }
 
   ngOnInit() {
   }
@@ -130,6 +133,7 @@ export class LoginComponent implements OnInit, OnChanges {
           if(response && response.success) {
             this.cookieService.set( 'Token', response.message, 1/24 );
             this.cookieService.set( 'User-Context', value.loginUsername, 1/24 );
+            this.authorizationService.userLoggedIn.next(true);
           } else {
             this.isLoginError = true;
             this.loginMessage = response.message;

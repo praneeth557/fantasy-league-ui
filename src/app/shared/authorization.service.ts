@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,6 @@ export class AuthorizationService {
 
     return obj;
   }
+
+  userLoggedIn = new Subject<boolean>();
 }

@@ -29,6 +29,14 @@ export class AppComponent {
     if(this.tokenValue && this.tokenValue != 'UNKNOWN' && this.userContext && this.userContext != 'UNKNOWN'){
       this.isUserLoggedIn = true;
     }
-    console.log(this.authorizationService.getHeadersObject());
+
+    this.authorizationService.userLoggedIn.subscribe(
+      (isLogIn: boolean) => {
+        if(isLogIn) {
+          this.isUserLoggedIn = true;
+        }
+      }
+    );
+
   }
 }
