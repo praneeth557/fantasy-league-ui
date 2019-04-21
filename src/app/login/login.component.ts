@@ -5,6 +5,7 @@ import {Component,
         ViewChild} from '@angular/core';
 import { LoginService } from '../shared/login.service'
 import {NgForm} from "@angular/forms";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginComponent implements OnInit, OnChanges {
   @ViewChild('f') RegisterForm: NgForm;
+  @ViewChild('loginForm') loginForm: NgForm;
   isLoginView: boolean = true;
   isForgotPassword: boolean = false;
   securityQuestions:any = [];
@@ -20,8 +22,11 @@ export class LoginComponent implements OnInit, OnChanges {
   message:string;
   isError:boolean = false;
   isRegisterSuccess:boolean = false;
+  loginMessage:string;
+  isLoginError:boolean = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
   }
@@ -30,6 +35,7 @@ export class LoginComponent implements OnInit, OnChanges {
   }
 
   getRegisterView() {
+    this.isRegisterSuccess = false;
     this.isLoginView = false;
     this.isForgotPassword = false;
 
@@ -46,6 +52,7 @@ export class LoginComponent implements OnInit, OnChanges {
   getLoginView() {
     this.isLoginView = true;
     this.isForgotPassword = false;
+    this.isLoginError = false;
   }
 
   getResetPasswordView() {
@@ -58,7 +65,6 @@ export class LoginComponent implements OnInit, OnChanges {
       this.message = "Please fill all the required field.";
     }
     const value = form.value;
-    this.RegisterForm.reset();
 
     let reqObj = {
       name : value.name,
@@ -74,6 +80,7 @@ export class LoginComponent implements OnInit, OnChanges {
           if(response && response.success) {
             this.isRegisterSuccess = true;
             this.message = response.message;
+            this.RegisterForm.reset();
             setTimeout(() => {
               this.isLoginView = true;
               this.isForgotPassword = false;
@@ -103,5 +110,35 @@ export class LoginComponent implements OnInit, OnChanges {
     } else {
       this.securityAnswers = [];
     }
+  }
+
+  loginUser(loginForm: NgForm) {
+    if (!loginForm.valid) {
+      this.isLoginError = true;
+      this.loginMessage = "Please fill all the required fields.";
+    }
+    const value:any = loginForm.value;
+
+    let loginObj = {
+      "username" : value.loginUsername,
+      "password" : value.loginPassword
+    };
+
+    this.loginService.verifyUser(loginObj)
+      .subscribe(
+        (response:any) => {
+          if(response && response.success) {
+            this.cookieService.set( 'Token', response.message, 1/24 );
+            this.cookieService.set( 'User-Context', value.loginUsername, 1/24 );
+          } else {
+            this.isLoginError = true;
+            this.loginMessage = response.message;
+          }
+        },
+        (error) => {
+          this.isLoginError = true;
+          this.loginMessage = "Unable to login.";
+        }
+      )
   }
 }
