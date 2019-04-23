@@ -4,7 +4,7 @@
 }
 
 .navbar-inverse {
-  /*background-color: #2E4053 !important;*/
+  background-color: #154360;
   /*border-color: #212F3C;*/
   color: #fafafa;
   /*padding: 0 30px;*/
@@ -19,4 +19,20 @@
 
 .navbar-nav li a{
   color: #fafafa;
+}
+
+.nav-outlet {
+  padding: 100px 150px;
+  margin: auto;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  background-color: #0A202D;
+}
+
+@media only screen and (max-width: 768px) {
+  .nav-outlet {
+    padding: 100px 10px;
+    margin: auto;
+  }
 }

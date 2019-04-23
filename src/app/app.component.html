@@ -14,19 +14,21 @@
 
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#">HOME</a></li>
-          <li><a href="#">LEADERBOARD</a></li>
-          <li><a href="#">POINTS SYSTEM</a></li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/home">HOME</a></li>
+          <li routerLinkActive="active"><a routerLink="/leaderboard">LEADERBOARD</a></li>
+          <li routerLinkActive="active"><a routerLink="/pointsSystem">POINTS SYSTEM</a></li>
           <li><a href="#">LOGOUT</a></li>
         </ul>
       </div>
     </div>
   </nav>
+
+
+  <div class="nav-outlet">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <ng-template #loginView>
   <app-login></app-login>
 </ng-template>
-
-
-<router-outlet></router-outlet>
