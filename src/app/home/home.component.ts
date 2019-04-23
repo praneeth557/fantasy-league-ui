@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  isDetailedScore = false;
   constructor() { }
 
   ngOnInit() {
   }
 
+  expandDetailedView () {
+    this.isDetailedScore = true;
+  }
+
+  closeDetailedView () {
+    this.isDetailedScore = false;
+  }
 }

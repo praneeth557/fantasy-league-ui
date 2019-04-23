@@ -61,6 +61,15 @@
   font-size: 18px;
 }
 
+.black {
+  color: #154360;
+}
+
+.hr-margin {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
 
 @media only screen and (max-width: 768px) {
   .sch-time h4 {
