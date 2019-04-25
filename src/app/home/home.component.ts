@@ -10,8 +10,10 @@ export class HomeComponent implements OnInit {
 
   matchList = [];
   matchDetailedView: any = {};
+  playersAPIAvailability = [];
   playersAvailability = [];
   selectedType = '';
+  selectedMatchIndex = -1;
   collapseIndex = -1;
   constructor(private homeService: HomeService) { }
 
@@ -58,33 +60,43 @@ export class HomeComponent implements OnInit {
       fieldingPoints : 100,
       matchPoints : 300,
       status : matchObj.status,
-      mid : matchObj.mid
+      mid : matchObj.mid,
+      detailedView : {}
     };
 
     return obj;
   }
 
   detailedView(mid, index) {
+    let matchIndex = -1;
+    this.matchList.forEach((match, index) => {
+      if(match.mid == mid) {
+        matchIndex = index;
+      }
+    });
+    console.log(matchIndex);
     this.homeService.getUserMatchDetail(mid)
       .subscribe(
         (response: any) => {
           if(response && response.success) {
-            this.matchDetailedView = this.homeService.createDetailedView(response.message, true, mid);
+            if(matchIndex > -1) {
+              this.matchList[matchIndex].detailedView = this.homeService.createDetailedView(response.message, true, mid);
+            }
           } else {
-            this.matchDetailedView = this.homeService.createDetailedView({}, false, mid);
+            this.matchList[matchIndex].detailedView = this.homeService.createDetailedView({}, false, mid);
           }
         },
         (error) => console.log(error)
       )
   }
 
-  viewAvailabilityPlayers(type) {
-    console.log(this.matchDetailedView);
+  viewAvailabilityPlayers(type, index) {
     this.homeService.getPlayersAvailability()
       .subscribe(
         (response: any) => {
           if(response && response.success) {
             this.selectedType = type;
+            this.selectedMatchIndex = index;
             this.playersAvailability = response.message;
           } else {
           }
@@ -94,16 +106,15 @@ export class HomeComponent implements OnInit {
   }
 
   selectPlayer(details) {
-    for(let i=0; i<this.matchDetailedView.players.length; i++) {
-      if(this.matchDetailedView.players[i].type == this.selectedType) {
-        this.matchDetailedView.players[i].pid = details.pid;
-        this.matchDetailedView.players[i].name = details.name;
-        this.matchDetailedView.players[i].role = details.role;
-        this.matchDetailedView.players[i].team = details.team;
-        this.matchDetailedView.players[i].isExist = true;
+    for(let i=0; i<this.matchList[this.selectedMatchIndex].detailedView.players.length; i++) {
+      if(this.matchList[this.selectedMatchIndex].detailedView.players[i].type == this.selectedType) {
+        this.matchList[this.selectedMatchIndex].detailedView.players[i].pid = details.pid;
+        this.matchList[this.selectedMatchIndex].detailedView.players[i].name = details.name;
+        this.matchList[this.selectedMatchIndex].detailedView.players[i].role = details.role;
+        this.matchList[this.selectedMatchIndex].detailedView.players[i].team = details.team;
+        this.matchList[this.selectedMatchIndex].detailedView.players[i].isExist = true;
       }
     }
-    console.log(details);
   }
 
   trackByFn(index, player) {
