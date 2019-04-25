@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   matchDetailedView: any = {};
   playersAvailability = [];
   selectedType = '';
+  collapseIndex = -1;
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
     return obj;
   }
 
-  detailedView(mid) {
+  detailedView(mid, index) {
     this.homeService.getUserMatchDetail(mid)
       .subscribe(
         (response: any) => {

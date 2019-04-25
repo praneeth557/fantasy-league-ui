@@ -13,8 +13,8 @@
           {{match.opposition}}
         </h3>
         <div class="text-center">
-          <a type="button" *ngIf="match.status == 0 || match.status == 1" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" (click)="detailedView(match.mid)" [href]="'#' + match.mid"><b>Add/Modify</b></a>
-          <a type="button" *ngIf="match.status == 2 || match.status == 3" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" (click)="detailedView(match.mid)" [href]="'#' + match.mid"><b>View</b></a>
+          <a type="button" *ngIf="match.status == 0 || match.status == 1" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" (click)="detailedView(match.mid, index)" [href]="'#' + match.mid"><b>Add/Modify</b></a>
+          <a type="button" *ngIf="match.status == 2 || match.status == 3" class="btn btn-primary" data-toggle="collapse" data-parent="#accordion" (click)="detailedView(match.mid, index)" [href]="'#' + match.mid"><b>View</b></a>
           <span class="pd-left-5" *ngIf="match.status == 2"><i>(Locked)</i></span>
           <span class="pd-left-5" *ngIf="match.status == 3"><i>(Completed)</i></span>
         </div>
