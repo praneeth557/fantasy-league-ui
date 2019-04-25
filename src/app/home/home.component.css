@@ -70,6 +70,11 @@
   margin-bottom: 0px;
 }
 
+.add-icon {
+  color: #154360 !important;
+}
+
+.pointer {cursor: pointer;}
 
 @media only screen and (max-width: 768px) {
   .sch-time h4 {

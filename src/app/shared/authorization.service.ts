@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class AuthorizationService {
 
   token: string;
   userContext: string;
+  uid: any;
 
   setToken(token) {
     this.token = token;
@@ -17,6 +19,10 @@ export class AuthorizationService {
 
   setUserContext(username) {
     this.userContext = username;
+  }
+
+  setUID(uid) {
+    this.uid = uid;
   }
 
   getToken() {
@@ -27,14 +33,17 @@ export class AuthorizationService {
     return this.userContext;
   }
 
-  getHeadersObject() {
-    let obj = {
-      "Token": this.getToken(),
-      "User-Context": this.getUserContext(),
-      "Content-Type": "application/json"
-    };
+  getUID(){
+    return this.uid;
+  }
 
-    return obj;
+  getHeadersObject() {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Token', this.getToken())
+      .set('User-Context', this.getUserContext());
+
+    return headers;
   }
 
   userLoggedIn = new Subject<boolean>();

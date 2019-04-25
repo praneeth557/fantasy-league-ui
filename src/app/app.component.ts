@@ -11,6 +11,7 @@ export class AppComponent {
   isUserLoggedIn = false;
   tokenValue = 'UNKNOWN';
   userContext = 'UNKNOWN';
+  uid = 'UNKNOWN';
 
   constructor(private cookieService: CookieService,
               private authorizationService: AuthorizationService) { }
@@ -23,6 +24,10 @@ export class AppComponent {
     this.userContext = this.cookieService.get('User-Context');
     if(this.userContext && this.userContext != 'UNKNOWN') {
       this.authorizationService.setUserContext(this.userContext);
+    }
+    this.uid = this.cookieService.get('UID');
+    if(this.uid && this.uid != 'UNKNOWN') {
+      this.authorizationService.setUID(this.uid);
     }
 
 

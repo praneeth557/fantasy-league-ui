@@ -131,8 +131,9 @@ export class LoginComponent implements OnInit, OnChanges {
       .subscribe(
         (response:any) => {
           if(response && response.success) {
-            this.cookieService.set( 'Token', response.message, 1/24 );
-            this.cookieService.set( 'User-Context', value.loginUsername, 1/24 );
+            this.cookieService.set( 'Token', response.token, 1/24 );
+            this.cookieService.set( 'User-Context', response.username, 1/24 );
+            this.cookieService.set( 'UID', response.uid, 1/24 );
             this.authorizationService.userLoggedIn.next(true);
           } else {
             this.isLoginError = true;
