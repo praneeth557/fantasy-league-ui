@@ -15,6 +15,11 @@ export class HomeComponent implements OnInit {
   selectedType = '';
   selectedMatchIndex = -1;
   collapseIndex = -1;
+  isSaveMatchPlayersError = false;
+  saveMatchPLayersErrorMsg = "";
+  isSaveMatchPlayersSuccess = false;
+  saveMatchPLayersSuccessMsg = "";
+
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
@@ -120,5 +125,68 @@ export class HomeComponent implements OnInit {
 
   trackByFn(index, player) {
     return player.name; // or item.id
+  }
+
+  saveMatchPlayers(i) {
+    this.isSaveMatchPlayersError = false;
+    this.saveMatchPLayersErrorMsg = "";
+    this.isSaveMatchPlayersSuccess = false;
+    this.saveMatchPLayersSuccessMsg = "";
+    let saveMatchPlayersReqObj:any = {};
+    let detailedViewObj = this.matchList[i].detailedView;
+    if(this.matchList[i].status == 0 || this.matchList[i].status == 1) {
+      saveMatchPlayersReqObj.mid = detailedViewObj.mid;
+      saveMatchPlayersReqObj.uid = detailedViewObj.uid;
+      saveMatchPlayersReqObj.oid = detailedViewObj.oid;
+
+      detailedViewObj.players.forEach(player => {
+        if(player.pid) {
+          switch(player.type) {
+            case "CAPTAIN":
+              saveMatchPlayersReqObj.captain = player.pid;
+              break;
+            case "MV BATSMAN":
+              saveMatchPlayersReqObj.mvba = player.pid;
+              break;
+            case "MV BOWLER":
+              saveMatchPlayersReqObj.mvbo = player.pid;
+              break;
+            case "MV FIELDER":
+              saveMatchPlayersReqObj.mvar = player.pid;
+              break;
+            default:
+              this.isSaveMatchPlayersError = true;
+              this.saveMatchPLayersErrorMsg = player.type + " is not selected."
+              return;
+          }
+        } else {
+          this.isSaveMatchPlayersError = true;
+          this.saveMatchPLayersErrorMsg = player.type + " is not selected. Should select all player types.";
+          return;
+        }
+      });
+
+      if(!this.isSaveMatchPlayersError) {
+      this.homeService.saveMatchPlayers(saveMatchPlayersReqObj)
+        .subscribe(
+          (response: any) => {
+            if(response && response.success) {
+              this.isSaveMatchPlayersSuccess = true;
+              this.saveMatchPLayersSuccessMsg = response.message;
+            } else {
+              this.isSaveMatchPlayersError = true;
+              this.saveMatchPLayersErrorMsg = response.message;
+            }
+          },
+          (error) => {
+            this.isSaveMatchPlayersError = true;
+            this.saveMatchPLayersErrorMsg = "Unable to save at this time.";
+          }
+        )
+      }
+    } else {
+      this.isSaveMatchPlayersError = true;
+      this.saveMatchPLayersErrorMsg = "Match's edit status is either locked or completed."
+    }
   }
 }

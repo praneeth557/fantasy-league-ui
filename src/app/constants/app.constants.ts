@@ -8,4 +8,5 @@ export class AppConstants {
   GET_ALL_MATCHES_URL = "/api/match/getAllMatches";
   GET_USER_MATCH_DETAIL_URL = "/api/match/otherMatchDetails";
   GET_PLAYERS_AVAILABILITY_URL = "/api/usersPlayers/getAvailability";
+  SAVE_MATCH_PLAYERS_URL = "/api/match/saveOtherMatchDetails";
 }

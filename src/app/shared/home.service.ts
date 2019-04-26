@@ -79,4 +79,11 @@ export class HomeService {
 
     return this.http.post(url, reqObj, {headers: headers});
   }
+
+  saveMatchPlayers(saveObj) {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.SAVE_MATCH_PLAYERS_URL;
+
+    return this.http.post(url, saveObj, {headers: headers});
+  }
 }
