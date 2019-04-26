@@ -58,7 +58,7 @@
           <div class="thumbnail black text-center" *ngIf="player.isExist && (match.status == 0 || match.status == 1)">
             <h5><b>{{player.type}}</b></h5>
             <hr class="hr-margin"/>
-            <a href="" class="add-icon" (click)="viewAvailabilityPlayers(player.type)" data-toggle="modal" data-target="#selectPlayersView">
+            <a href="" class="add-icon" (click)="viewAvailabilityPlayers(player.type, i)" data-toggle="modal" data-target="#selectPlayersView">
               <h1 class="glyphicon glyphicon-user"></h1>
             </a>
             <h4><b>{{player.name}}</b></h4>

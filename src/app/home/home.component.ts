@@ -119,6 +119,6 @@ export class HomeComponent implements OnInit {
   }
 
   trackByFn(index, player) {
-    return player.isExist; // or item.id
+    return player.name; // or item.id
   }
 }
