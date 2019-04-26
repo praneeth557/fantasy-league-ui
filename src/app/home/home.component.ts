@@ -43,7 +43,8 @@ export class HomeComponent implements OnInit {
       res.splice(index2, 1);
     }
     let newDate = res.join("");
-    let d = new Date(newDate);
+    //let d = new Date(newDate);
+    let d = new Date(newDate.replace(/-/g, "/"));
     let n = d.toDateString();
     let splitN = n.split(" ");
     let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
