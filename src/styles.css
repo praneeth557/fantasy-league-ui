@@ -13,6 +13,10 @@ body, html {
   padding-left: 10px;
 }
 
+.pd-bottom-10 {
+  padding-bottom: 10px;
+}
+
 .fantasy-background .panel-heading{
   background-color: #154360 !important;
 }

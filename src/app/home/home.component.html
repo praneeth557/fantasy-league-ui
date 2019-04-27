@@ -14,7 +14,7 @@
 
 <div class="row white" *ngIf="isStarted && isStarted != 0">
   <div class="col-sm-12" id="accordion">
-    <div class="col-xs-12 text-white">
+    <div class="col-xs-12 text-white pd-bottom-10">
       <i class="glyphicon glyphicon-hand-right"></i>
       <span class="pd-left-10">Click on <b>view</b> or <b>add/modify</b> button to toggle between the players view.</span>
     </div>
@@ -57,6 +57,10 @@
       </div>
 
       <div class="col-xs-12 jumbotron panel-box collapse" id="{{match.mid}}">
+        <div class="col-xs-12 text-white pd-bottom-10">
+          <i class="glyphicon glyphicon-hand-right"></i>
+          <span class="pd-left-10">Players availability will reflect after saving the changes.</span>
+        </div>
         <div class="col-xs-6 col-md-3" *ngFor="let player of match.detailedView.players; index as s; trackBy:trackByFn">
           <div class="thumbnail black text-center" *ngIf="match.status == 2 || match.status == 3">
             <h5><b>{{player.type}}</b></h5>
