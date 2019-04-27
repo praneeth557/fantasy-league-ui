@@ -5,6 +5,10 @@
   border: 1px solid #CDE8F9;
 }
 
+.get-started {
+  padding: 15px;
+}
+
 .white {
   background-color: #333;
   padding: 10px;

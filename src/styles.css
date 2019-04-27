@@ -8,3 +8,19 @@ body, html {
 .pd-left-5 {
   padding-left: 5px;
 }
+
+.pd-left-10 {
+  padding-left: 10px;
+}
+
+.fantasy-background .panel-heading{
+  background-color: #154360 !important;
+}
+
+.fantasy-color {
+  border-color: #154360 !important;
+}
+
+.text-white {
+  color: #fafafa;
+}

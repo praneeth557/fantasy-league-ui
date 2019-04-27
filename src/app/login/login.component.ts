@@ -135,6 +135,8 @@ export class LoginComponent implements OnInit, OnChanges {
             this.cookieService.set( 'Token', response.token, 1/24 );
             this.cookieService.set( 'User-Context', response.username, 1/24 );
             this.cookieService.set( 'UID', response.uid, 1/24 );
+            this.cookieService.set( 'IsStarted', response.isStarted, 1/24 );
+            this.cookieService.set( 'Role', response.role, 1/24 );
             this.authorizationService.userLoggedIn.next(true);
             this.authorizationService.setToken(response.token);
             this.authorizationService.setUserContext(response.username);

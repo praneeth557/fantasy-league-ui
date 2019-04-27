@@ -1,5 +1,23 @@
-<div class="row white">
+<div class="row">
+  <div class="col-sm-12" *ngIf="!isStarted || isStarted == 0">
+    <div class="row">
+      <div class="panel panel-default text-center get-started col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h3>Welcome to fantasy league!</h3>
+        <button type="button" class="btn btn-primary btn-lg" (click)="getStarted()">
+          Get Started
+          <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row white" *ngIf="isStarted && isStarted != 0">
   <div class="col-sm-12" id="accordion">
+    <div class="col-xs-12 text-white">
+      <i class="glyphicon glyphicon-hand-right"></i>
+      <span class="pd-left-10">Click on <b>view</b> or <b>add/modify</b> button to toggle between the players view.</span>
+    </div>
     <div class="row margin-bottom-10" *ngFor="let match of matchList; index as i;">
       <div class="panel-box col-xs-4 col-md-2 sch-time text-center">
           <h4>{{match.week}}</h4>
@@ -63,9 +81,6 @@
             </a>
             <h4><b>{{player.name}}</b></h4>
           </div>
-          <div class="caption text-center">
-            <h4>Thumbnail label</h4>
-          </div>
         </div>
         <div class="row" *ngIf="match.status == 0 || match.status == 1">
           <hr class="col-xs-12" />
@@ -89,7 +104,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title" id="myModalLabel">Select Player</h4>
         </div>
         <div class="modal-body">
           <div class="list-group">

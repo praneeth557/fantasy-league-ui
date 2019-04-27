@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../shared/home.service';
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-home',
@@ -19,10 +20,13 @@ export class HomeComponent implements OnInit {
   saveMatchPLayersErrorMsg = "";
   isSaveMatchPlayersSuccess = false;
   saveMatchPLayersSuccessMsg = "";
+  isStarted:any = 0;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService,
+              private cookieService: CookieService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.isStarted = this.cookieService.get('IsStarted');
     this.homeService.getAllMatches()
       .subscribe(
         (response: any) => {
@@ -61,10 +65,10 @@ export class HomeComponent implements OnInit {
       time : d.toLocaleTimeString(),
       team : matchObj.team,
       opposition : matchObj.opposition,
-      battingPoints : 100,
-      bowlingPoints : 100,
-      fieldingPoints : 100,
-      matchPoints : 300,
+      battingPoints : "N/A",
+      bowlingPoints : "N/A",
+      fieldingPoints : "N/A",
+      matchPoints : "N/A",
       status : matchObj.status,
       mid : matchObj.mid,
       detailedView : {}
@@ -75,6 +79,10 @@ export class HomeComponent implements OnInit {
 
   detailedView(mid, index) {
     let matchIndex = -1;
+    this.isSaveMatchPlayersError = false;
+    this.saveMatchPLayersErrorMsg = "";
+    this.isSaveMatchPlayersSuccess = false;
+    this.saveMatchPLayersSuccessMsg = "";
     this.matchList.forEach((match, index) => {
       if(match.mid == mid) {
         matchIndex = index;
@@ -156,7 +164,7 @@ export class HomeComponent implements OnInit {
               break;
             default:
               this.isSaveMatchPlayersError = true;
-              this.saveMatchPLayersErrorMsg = player.type + " is not selected."
+              this.saveMatchPLayersErrorMsg = player.type + " is not selected.";
               return;
           }
         } else {
@@ -188,5 +196,19 @@ export class HomeComponent implements OnInit {
       this.isSaveMatchPlayersError = true;
       this.saveMatchPLayersErrorMsg = "Match's edit status is either locked or completed."
     }
+  }
+
+  getStarted() {
+    this.homeService.createAvailability()
+      .subscribe(
+        (response: any) => {
+          if(response && response.success) {
+            this.cookieService.set( 'IsStarted', response.isStarted, 1/24 );
+            this.isStarted = 1;
+          } else {
+          }
+        },
+        (error) => console.log(error)
+      )
   }
 }

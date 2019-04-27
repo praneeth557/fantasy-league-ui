@@ -86,4 +86,11 @@ export class HomeService {
 
     return this.http.post(url, saveObj, {headers: headers});
   }
+
+  createAvailability() {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.CREATE_AVAILABILITY_URL;
+
+    return this.http.get(url, {headers: headers});
+  }
 }
