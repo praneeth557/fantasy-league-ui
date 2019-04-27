@@ -7,6 +7,7 @@ import { LoginService } from '../shared/login.service'
 import {NgForm} from "@angular/forms";
 import { CookieService } from 'ngx-cookie-service';
 import { AuthorizationService } from '../shared/authorization.service';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit, OnChanges {
 
   constructor(private loginService: LoginService,
               private cookieService: CookieService,
-              private authorizationService: AuthorizationService) { }
+              private authorizationService: AuthorizationService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -46,7 +48,6 @@ export class LoginComponent implements OnInit, OnChanges {
       .subscribe(
         (response) => {
           this.securityQuestions = response;
-          console.log(response)
         },
         (error) => console.log(error)
       )
@@ -135,6 +136,10 @@ export class LoginComponent implements OnInit, OnChanges {
             this.cookieService.set( 'User-Context', response.username, 1/24 );
             this.cookieService.set( 'UID', response.uid, 1/24 );
             this.authorizationService.userLoggedIn.next(true);
+            this.authorizationService.setToken(response.token);
+            this.authorizationService.setUserContext(response.username);
+            this.authorizationService.setUID(response.uid);
+            this.router.navigate(['/home']);
           } else {
             this.isLoginError = true;
             this.loginMessage = response.message;

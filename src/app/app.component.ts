@@ -9,39 +9,25 @@ import { AuthorizationService } from './shared/authorization.service';
 })
 export class AppComponent {
   isUserLoggedIn = false;
-  tokenValue = 'UNKNOWN';
-  userContext = 'UNKNOWN';
-  uid = 'UNKNOWN';
+  tokenValue : string;
+  userContext : string;
+  uid : any;
 
   constructor(private cookieService: CookieService,
               private authorizationService: AuthorizationService) { }
 
   ngOnInit(): void {
     this.tokenValue = this.cookieService.get('Token');
-    if(this.tokenValue && this.tokenValue != 'UNKNOWN') {
+    if(this.tokenValue) {
       this.authorizationService.setToken(this.tokenValue);
     }
     this.userContext = this.cookieService.get('User-Context');
-    if(this.userContext && this.userContext != 'UNKNOWN') {
+    if(this.userContext) {
       this.authorizationService.setUserContext(this.userContext);
     }
     this.uid = this.cookieService.get('UID');
-    if(this.uid && this.uid != 'UNKNOWN') {
+    if(this.uid) {
       this.authorizationService.setUID(this.uid);
     }
-
-
-    if(this.tokenValue && this.tokenValue != 'UNKNOWN' && this.userContext && this.userContext != 'UNKNOWN'){
-      this.isUserLoggedIn = true;
-    }
-
-    this.authorizationService.userLoggedIn.subscribe(
-      (isLogIn: boolean) => {
-        if(isLogIn) {
-          this.isUserLoggedIn = true;
-        }
-      }
-    );
-
   }
 }
