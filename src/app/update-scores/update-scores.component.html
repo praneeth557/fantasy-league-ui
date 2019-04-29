@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-xs-12">
+    <select class="form-control" #selectedMatch id="matchDropdown">
+      <option value="-1" name="select" selected>Select</option>
+      <option *ngFor="let a of matchList;" [value]="a.mid">{{a.opposition}}</option>
+    </select>
+  </div>
+
+  <!--Batting-->
+  <div class="col-xs-12" *ngIf="updateView == 1">
+    <table class="table table-bordered table-striped">
+      <caption><h4>Batting</h4></caption>
+      <thead>
+        <tr>
+          <th>Sno.</th>
+          <th>Player Name</th>
+          <th>Runs</th>
+          <th>Balls</th>
+          <th>6s</th>
+          <th>4s</th>
+          <th>isDuck</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of players; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{player.name}}</td>
+        <td><input type="number" class="form-control" [id]="'runs' + player.pid" [(ngModel)]="player.batting.runs"></td>
+        <td><input type="number" class="form-control" [id]="'balls' + player.pid" [(ngModel)]="player.batting.balls"></td>
+        <td><input type="number" class="form-control" [id]="'sixes' + player.pid" [(ngModel)]="player.batting.sixes"></td>
+        <td><input type="number" class="form-control" [id]="'fours' + player.pid" [(ngModel)]="player.batting.fours"></td>
+        <td>
+          <select class="form-control" [id]="'duck' + player.pid" [(ngModel)]="player.batting.isDuck">
+            <option>0</option>
+            <option>1</option>
+          </select>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="col-xs-12 text-right">
+      <button class="btn btn-primary" (click)="saveScoreNext(1, 2, true)">Next</button>
+    </div>
+  </div>
+
+
+  <!--Bowling-->
+  <div class="col-xs-12" *ngIf="updateView == 2">
+    <table class="table table-bordered table-striped">
+      <caption><h4>Bowling</h4></caption>
+      <thead>
+      <tr>
+        <th>Sno.</th>
+        <th>Player Name</th>
+        <th>Overs</th>
+        <th>Maidens</th>
+        <th>Runs</th>
+        <th>Wickets</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of players; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{player.name}}</td>
+        <td><input type="number" class="form-control" [id]="'overs' + player.pid" [(ngModel)]="player.bowling.overs"></td>
+        <td><input type="number" class="form-control" [id]="'maidens' + player.pid" [(ngModel)]="player.bowling.maidens"></td>
+        <td><input type="number" class="form-control" [id]="'bruns' + player.pid" [(ngModel)]="player.bowling.runs"></td>
+        <td><input type="number" class="form-control" [id]="'wickets' + player.pid" [(ngModel)]="player.bowling.wickets"></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="col-xs-12 text-right">
+      <button class="btn btn-primary" (click)="saveScoreNext(2, 1, false)">Back</button>
+      <button class="btn btn-primary" (click)="saveScoreNext(2, 3, true)">Next</button>
+    </div>
+  </div>
+
+
+  <!--Fielding-->
+  <div class="col-xs-12" *ngIf="updateView == 3">
+    <table class="table table-bordered table-striped">
+      <caption><h4>Fielding</h4></caption>
+      <thead>
+      <tr>
+        <th>Sno.</th>
+        <th>Player Name</th>
+        <th>Catches</th>
+        <th>Stumpings</th>
+        <th>Runouts</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let player of players; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{player.name}}</td>
+        <td><input type="number" class="form-control" [id]="'catches' + player.pid" [(ngModel)]="player.fielding.catches"></td>
+        <td><input type="number" class="form-control" [id]="'stumpings' + player.pid" [(ngModel)]="player.fielding.stumpings"></td>
+        <td><input type="number" class="form-control" [id]="'runouts' + player.pid" [(ngModel)]="player.fielding.runouts"></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="col-xs-12 text-right">
+      <div *ngIf="isSaveScoreError" class="alert alert-danger" role="alert">
+        <div>{{saveScoreError}}</div>
+      </div>
+      <button class="btn btn-primary" (click)="saveScoreNext(3, 2, false)">Back</button>
+      <button class="btn btn-primary" (click)="saveScore(selectedMatch)">Save</button>
+    </div>
+  </div>
+</div>

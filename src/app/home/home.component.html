@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-sm-12" *ngIf="!isStarted || isStarted == 0">
+<div class="row" *ngIf="(!isStarted || isStarted == 0) && !isAdmin">
+  <div class="col-sm-12" >
     <div class="row">
       <div class="panel panel-default text-center get-started col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h3>Welcome to fantasy league!</h3>
@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="row white" *ngIf="isStarted && isStarted != 0">
+<div class="row white" *ngIf="isStarted && isStarted != 0 && !isAdmin">
   <div class="col-sm-12" id="accordion">
     <div class="col-xs-12 text-white pd-bottom-10">
       <i class="glyphicon glyphicon-hand-right"></i>
@@ -129,4 +129,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="isAdmin">
+  <app-update-scores [matchList]="matchList" [players]="allPlayers"></app-update-scores>
 </div>

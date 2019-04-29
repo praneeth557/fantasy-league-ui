@@ -14,6 +14,7 @@ import { AppConstants } from './constants/app.constants';
 import { FormsModule } from "@angular/forms";
 import { AppSelectValidatorDirective } from './directives/app-select-validator.directive';
 import { CookieService } from 'ngx-cookie-service';
+import { UpdateScoresComponent } from './update-scores/update-scores.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CookieService } from 'ngx-cookie-service';
     HomeComponent,
     LeaderboardComponent,
     PointsSystemComponent,
-    AppSelectValidatorDirective
+    AppSelectValidatorDirective,
+    UpdateScoresComponent
   ],
   imports: [
     BrowserModule,

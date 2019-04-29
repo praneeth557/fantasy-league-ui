@@ -10,23 +10,23 @@ import {CookieService} from "ngx-cookie-service";
 export class HomeComponent implements OnInit {
 
   matchList = [];
-  matchDetailedView: any = {};
-  playersAPIAvailability = [];
   playersAvailability = [];
   selectedType = '';
   selectedMatchIndex = -1;
-  collapseIndex = -1;
   isSaveMatchPlayersError = false;
   saveMatchPLayersErrorMsg = "";
   isSaveMatchPlayersSuccess = false;
   saveMatchPLayersSuccessMsg = "";
   isStarted:any = 0;
+  isAdmin:any = false;
+  allPlayers:any = [];
 
   constructor(private homeService: HomeService,
               private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.isStarted = this.cookieService.get('IsStarted');
+    this.isAdmin = this.cookieService.get('Role') == '1' ? true : false;
     this.homeService.getAllMatches()
       .subscribe(
         (response: any) => {
@@ -38,7 +38,19 @@ export class HomeComponent implements OnInit {
           console.log(this.matchList);
         },
         (error) => console.log(error)
-      )
+      );
+
+    if(this.isAdmin) {
+      this.homeService.getAllPlayers()
+        .subscribe(
+          (response: any) => {
+            if(response && response.success) {
+              this.allPlayers = response.message;
+            }
+          },
+          (error) => console.log(error)
+        );
+    }
   }
 
   getHomeObject (matchObj) {

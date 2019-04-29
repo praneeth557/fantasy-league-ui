@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthorizationService } from './shared/authorization.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
   uid : any;
 
   constructor(private cookieService: CookieService,
-              private authorizationService: AuthorizationService) { }
+              private authorizationService: AuthorizationService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.tokenValue = this.cookieService.get('Token');
@@ -29,5 +31,15 @@ export class AppComponent {
     if(this.uid) {
       this.authorizationService.setUID(this.uid);
     }
+  }
+
+  logout(): void {
+    console.log("Logout");
+    this.cookieService.delete('Token');
+    this.cookieService.delete('User-Context');
+    this.cookieService.delete('UID');
+    this.cookieService.delete('IsStarted');
+    this.cookieService.delete('Role');
+    this.router.navigate(['/login']);
   }
 }

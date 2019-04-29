@@ -93,4 +93,18 @@ export class HomeService {
 
     return this.http.get(url, {headers: headers});
   }
+
+  getAllPlayers() {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.GET_ALL_PLAYERS_URL;
+
+    return this.http.get(url, {headers: headers});
+  }
+
+  savePlayersScores(scoresObj) {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.SAVE_PLAYERS_SCORES_URL;
+
+    return this.http.post(url, scoresObj, {headers: headers});
+  }
 }
