@@ -1,0 +1,22 @@
+.table-outside-bordered {
+  border: 2px solid #72838E;
+}
+
+.table-outside-bordered td {
+  padding: 10px;
+  background-color: #154360;
+  color: #fafafa;
+}
+
+.expanded-td {
+  padding: 0 !important;
+  border: none;
+}
+
+
+.expanded-panel {
+  background-color: #0A202D;
+  border: 1px solid #ddd;
+  margin: 10px;
+  color: #EBEDEF;
+}
