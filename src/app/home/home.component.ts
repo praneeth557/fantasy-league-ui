@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
                 if(Array.isArray(response) && pointsRes.success) {
                   for (let i=0; i<response.length; i++) {
                     let pointsIndex = -1;
-                    pointsIndex = pointsRes.allMatchPoints != null && pointsRes.allMatchPoints.findIndex(pts => {return pts.mid == response[i].mid});
+                    pointsIndex = pointsRes.allMatchPoints != null &&  Array.isArray(pointsRes.allMatchPoints) ? pointsRes.allMatchPoints.findIndex(pts => {return pts.mid == response[i].mid}) : -1;
                     if(pointsIndex > -1) {
                       this.matchList.push(this.getHomeObject(response[i], pointsRes.allMatchPoints[pointsIndex]));
                     } else {
