@@ -12,4 +12,6 @@ export class AppConstants {
   CREATE_AVAILABILITY_URL = "/api/usersPlayers/createAvailability";
   GET_ALL_PLAYERS_URL = "/api/player/getAllPlayers";
   SAVE_PLAYERS_SCORES_URL = "/api/player/savePlayersScores";
+  GET_ALL_MATCH_POINTS_URL = "/api/match/getAllMatchPoints";
+  GET_ALL_USER_MATCH_POINTS_URL = "/api/match/getAllUserMatchPoints";
 }

@@ -20,3 +20,14 @@
   margin: 10px;
   color: #EBEDEF;
 }
+
+.expandAnchor {
+  color: #fafafa;
+}
+
+.expanded-bc {
+  margin-bottom: 0;
+}
+.expanded-bc, .expanded-bc tr, .expanded-bc td {
+  background-color: #0A202D;
+}

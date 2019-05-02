@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../shared/home.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  leaderboardList = [];
+
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+
+    this.homeService.getAllUserMatchPoints()
+      .subscribe(
+        (response: any) => {
+          if(response && response.success) {
+            this.leaderboardList = response.points;
+          }
+        }
+      );
   }
 
 }

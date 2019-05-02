@@ -61,22 +61,41 @@
           <i class="glyphicon glyphicon-hand-right"></i>
           <span class="pd-left-10">Players availability will reflect after saving the changes.</span>
         </div>
-        <div class="col-xs-12 col-md-3" *ngFor="let player of match.detailedView.players; index as s; trackBy:trackByFn">
+        <div class="col-sm-12 col-md-3" *ngFor="let player of match.detailedView.players; index as s; trackBy:trackByFn">
           <div class="thumbnail black text-center" *ngIf="match.status == 3">
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-xs-12">
                 <h5><b>{{player.type}}</b></h5>
                 <hr class="hr-margin"/>
                 <h1 class="glyphicon glyphicon-user"></h1>
                 <h4 *ngIf="player.name"><b>{{player.name}}</b></h4>
-                <h4 *ngIf="!player.name"><b>N/A</b></h4>
+                <h4 *ngIf="!player.name"><b>Not Selected</b></h4>
+                <hr class="hr-margin"/>
+                <table class="table table-striped" *ngIf="player.name">
+                  <tr>
+                    <td class="text-left"><h5>Batting Points</h5></td>
+                    <td class="text-right"><h5>{{player.battingsPts}}</h5></td>
+                  </tr>
+                  <tr>
+                    <td class="text-left"><h5>Bowling Points</h5></td>
+                    <td class="text-right"><h5>{{player.bowlingPts}}</h5></td>
+                  </tr>
+                  <tr>
+                    <td class="text-left"><h5>Fielding Points</h5></td>
+                    <td class="text-right"><h5>{{player.fieldingPts}}</h5></td>
+                  </tr>
+                  <tr>
+                    <td class="text-left"><h5>Match Points</h5></td>
+                    <td class="text-right"><h5>{{player.totalPts}}</h5></td>
+                  </tr>
+                </table>
               </div>
-              <ul class="list-group black col-xs-6 text-left">
-                <li class="list-group-item">Batting Points </li>
-                <li class="list-group-item">Bowling Points</li>
-                <li class="list-group-item">Fielding Points</li>
-                <li class="list-group-item">Match Points</li>
-              </ul>
+              <!--<div class="col-xs-6">-->
+                <!--<h5>Batting Points <span class="text-right">100</span></h5>-->
+                <!--<h5>Bowling Points <span class="text-right">100</span></h5>-->
+                <!--<h5>Fielding Points <span class="text-right">100</span></h5>-->
+                <!--<h5>Match Points <span class="text-right">100</span></h5>-->
+              <!--</div>-->
             </div>
           </div>
           <div class="thumbnail black text-center" *ngIf="match.status == 2">

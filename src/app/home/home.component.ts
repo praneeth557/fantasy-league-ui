@@ -30,12 +30,24 @@ export class HomeComponent implements OnInit {
     this.homeService.getAllMatches()
       .subscribe(
         (response: any) => {
-          if(Array.isArray(response)) {
-            for (let i=0; i<response.length; i++) {
-              this.matchList.push(this.getHomeObject(response[i]));
-            }
-          }
-          console.log(this.matchList);
+          let allMatchPointsResObj = {uid: parseInt(this.cookieService.get('UID'))};
+          this.homeService.getAllMatchPoints(allMatchPointsResObj)
+            .subscribe(
+              (pointsRes: any) => {
+                if(Array.isArray(response) && pointsRes.success) {
+                  for (let i=0; i<response.length; i++) {
+                    let pointsIndex = -1;
+                    pointsIndex = pointsRes.allMatchPoints && pointsRes.allMatchPoints.findIndex(pts => {return pts.mid == response[i].mid});
+                    if(pointsIndex > -1) {
+                      this.matchList.push(this.getHomeObject(response[i], pointsRes.allMatchPoints[pointsIndex]));
+                    } else {
+                      this.matchList.push(this.getHomeObject(response[i], null));
+                    }
+                  }
+                }
+              },
+              (error2) => console.log(error2)
+            );
         },
         (error) => console.log(error)
       );
@@ -53,7 +65,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getHomeObject (matchObj) {
+  getHomeObject (matchObj, points) {
     let res = matchObj.matchDate.split("");
     let index = res.indexOf('T');
     if (index > -1) {
@@ -77,13 +89,14 @@ export class HomeComponent implements OnInit {
       time : d.toLocaleTimeString(),
       team : matchObj.team,
       opposition : matchObj.opposition,
-      battingPoints : "N/A",
-      bowlingPoints : "N/A",
-      fieldingPoints : "N/A",
-      matchPoints : "N/A",
+      battingPoints : points && points.totalPoints ? points.totalPoints.battingsPts : "N/A",
+      bowlingPoints : points && points.totalPoints ? points.totalPoints.bowlingPts : "N/A",
+      fieldingPoints : points && points.totalPoints ? points.totalPoints.fieldingPts : "N/A",
+      matchPoints : points && points.totalPoints ? points.totalPoints.totalPts : "N/A",
       status : matchObj.status,
       mid : matchObj.mid,
-      detailedView : {}
+      detailedView : {},
+      points : points ? points.points : null
     };
 
     return obj;
@@ -100,16 +113,15 @@ export class HomeComponent implements OnInit {
         matchIndex = index;
       }
     });
-    console.log(matchIndex);
     this.homeService.getUserMatchDetail(mid)
       .subscribe(
         (response: any) => {
           if(response && response.success) {
             if(matchIndex > -1) {
-              this.matchList[matchIndex].detailedView = this.homeService.createDetailedView(response.message, true, mid);
+              this.matchList[matchIndex].detailedView = this.homeService.createDetailedView(response.message, true, mid, this.matchList[matchIndex].points);
             }
           } else {
-            this.matchList[matchIndex].detailedView = this.homeService.createDetailedView({}, false, mid);
+            this.matchList[matchIndex].detailedView = this.homeService.createDetailedView({}, false, mid, null);
           }
         },
         (error) => console.log(error)

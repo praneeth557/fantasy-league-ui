@@ -30,7 +30,7 @@ export class HomeService {
     return this.http.post(url, reqObj, {headers: headers});
   }
 
-  createDetailedView(detailedObj, isExist, mid) {
+  createDetailedView(detailedObj, isExist, mid, points) {
     if(!isExist) {
       let obj = {
         oid:0,
@@ -61,6 +61,16 @@ export class HomeService {
     } else {
       for(let i=0; i<detailedObj.players.length; i++) {
         detailedObj.players[i].isExist = true;
+        if(points && Array.isArray(points) && points.length) {
+          for(let j=0; j<points.length; j++) {
+            if(points[j].role == detailedObj.players[i].type) {
+              detailedObj.players[i].battingsPts =  points[j].battingsPts;
+              detailedObj.players[i].bowlingPts =  points[j].bowlingPts;
+              detailedObj.players[i].fieldingPts = points[j].fieldingPts;
+              detailedObj.players[i].totalPts = points[j].totalPts;
+            }
+          }
+        }
       }
 
       detailedObj.isExist = isExist;
@@ -106,5 +116,19 @@ export class HomeService {
     let url = this.appConstants.APP_URL + this.appConstants.SAVE_PLAYERS_SCORES_URL;
 
     return this.http.post(url, scoresObj, {headers: headers});
+  }
+
+  getAllMatchPoints(resObj) {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.GET_ALL_MATCH_POINTS_URL;
+
+    return this.http.post(url, resObj, {headers: headers});
+  }
+
+  getAllUserMatchPoints() {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.GET_ALL_USER_MATCH_POINTS_URL;
+
+    return this.http.get(url, {headers: headers});
   }
 }

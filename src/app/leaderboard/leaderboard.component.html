@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-xs-12">
-    <table class="table table-striped table-outside-bordered table-responsive">
+  <div class="col-xs-12" class="table-responsive">
+    <table class="table table-striped table-outside-bordered" id="accordion">
       <thead>
         <tr>
           <th></th>
@@ -13,211 +13,51 @@
           <th class="text-right">Total Points</th>
         </tr>
       </thead>
-      <tbody id="accordion">
+      <tbody *ngFor="let userPoints of leaderboardList; index as s;">
         <tr>
           <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <a role="button" class="expandAnchor" data-toggle="collapse" data-parent="#accordion" [href]="'#collapse' + s" aria-expanded="true" aria-controls="collapseOne">
               <i class="glyphicon glyphicon-chevron-right"></i>
             </a>
           </td>
-          <td>1</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
+          <td>{{s+1}}</td>
+          <td>{{userPoints.name}}</td>
+          <td>{{userPoints.username}}</td>
+          <td class="text-right">{{userPoints.totalPoints.battingsPts}}</td>
+          <td class="text-right">{{userPoints.totalPoints.bowlingPts}}</td>
+          <td class="text-right">{{userPoints.totalPoints.fieldingPts}}</td>
+          <td class="text-right">{{userPoints.totalPoints.totalPts}}</td>
         </tr>
         <tr>
           <td colspan="8" class="expanded-td">
-            <div id="collapseOne" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div [id]="'collapse' + s" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
+              <div class="col-xs-12 text-white pd-bottom-10">
+                <i class="glyphicon glyphicon-hand-right"></i>
+                <span class="pd-left-10">Only players added matches are shown.</span>
               </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>2</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseTwo" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              <div class="col-xs-12 text-white pd-bottom-10 text-center" *ngIf="!userPoints.allMatchPoints">
+                <span class="pd-left-10">No matches available.</span>
               </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>3</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseThree" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>4</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseFour" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>5</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseFive" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>6</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseSix" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>7</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseSeven" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>8</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseEight" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
-          <td>9</td>
-          <td>Praneeth Veerlapally</td>
-          <td>praneeth557</td>
-          <td class="text-right">75</td>
-          <td class="text-right">98</td>
-          <td class="text-right">35</td>
-          <td class="text-right">208</td>
-        </tr>
-        <tr>
-          <td colspan="8" class="expanded-td">
-            <div id="collapseNine" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-              </div>
+              <table class="table expanded-bc" *ngIf="userPoints.allMatchPoints">
+                <thead>
+                  <tr>
+                    <th>Match Against</th>
+                    <th class="text-right">Batting Points</th>
+                    <th class="text-right">Bowling Points</th>
+                    <th class="text-right">Fielding Against</th>
+                    <th class="text-right">Total Match Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let matchPoints of userPoints.allMatchPoints; index as u;">
+                    <td>{{matchPoints.opposition}}</td>
+                    <td class="text-right">{{matchPoints.totalPoints.battingsPts}}</td>
+                    <td class="text-right">{{matchPoints.totalPoints.bowlingPts}}</td>
+                    <td class="text-right">{{matchPoints.totalPoints.fieldingPts}}</td>
+                    <td class="text-right">{{matchPoints.totalPoints.totalPts}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </td>
         </tr>
