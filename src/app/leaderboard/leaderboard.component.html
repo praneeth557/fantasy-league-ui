@@ -1,9 +1,12 @@
 <div class="row">
   <div class="col-xs-12" class="table-responsive">
+    <div class="col-xs-12 pd-bottom-10">
+      <i class="glyphicon glyphicon-hand-right"></i>
+      <span class="pd-left-10 black">Click on <i class="glyphicon glyphicon-eye-open black"></i> icon to see individual match points.</span>
+    </div>
     <table class="table table-striped table-outside-bordered" id="accordion">
       <thead>
         <tr>
-          <th></th>
           <th>Pos</th>
           <th>Name</th>
           <th>Username</th>
@@ -11,15 +14,11 @@
           <th class="text-right">Bowling Points</th>
           <th class="text-right">Fielding Points</th>
           <th class="text-right">Total Points</th>
+          <th class="text-right">Details</th>
         </tr>
       </thead>
       <tbody *ngFor="let userPoints of leaderboardList; index as s;">
         <tr>
-          <td>
-            <a role="button" class="expandAnchor" data-toggle="collapse" data-parent="#accordion" [href]="'#collapse' + s" aria-expanded="true" aria-controls="collapseOne">
-              <i class="glyphicon glyphicon-chevron-right"></i>
-            </a>
-          </td>
           <td>{{s+1}}</td>
           <td>{{userPoints.name}}</td>
           <td>{{userPoints.username}}</td>
@@ -27,13 +26,18 @@
           <td class="text-right">{{userPoints.totalPoints.bowlingPts}}</td>
           <td class="text-right">{{userPoints.totalPoints.fieldingPts}}</td>
           <td class="text-right">{{userPoints.totalPoints.totalPts}}</td>
+          <td class="text-right">
+            <a role="button" class="expandAnchor" data-toggle="collapse" data-parent="#accordion" [href]="'#collapse' + s" aria-expanded="true" aria-controls="collapseOne" (ngModel)="'togglePoints'+s" (click)="togglePointsDetails('togglePoints'+s)">
+              <i class="glyphicon glyphicon-eye-open"></i>
+            </a>
+          </td>
         </tr>
         <tr>
           <td colspan="8" class="expanded-td">
             <div [id]="'collapse' + s" class="panel-collapse collapse expanded-panel" role="tabpanel" aria-labelledby="headingOne">
               <div class="col-xs-12 text-white pd-bottom-10">
                 <i class="glyphicon glyphicon-hand-right"></i>
-                <span class="pd-left-10">Only players added matches are shown.</span>
+                <span class="pd-left-10">Only players selected matches are shown.</span>
               </div>
               <div class="col-xs-12 text-white pd-bottom-10 text-center" *ngIf="!userPoints.allMatchPoints">
                 <span class="pd-left-10">No matches available.</span>
@@ -41,6 +45,7 @@
               <table class="table expanded-bc" *ngIf="userPoints.allMatchPoints">
                 <thead>
                   <tr>
+                    <th>Match ID</th>
                     <th>Match Against</th>
                     <th class="text-right">Batting Points</th>
                     <th class="text-right">Bowling Points</th>
@@ -49,7 +54,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let matchPoints of userPoints.allMatchPoints; index as u;">
+                  <tr *ngFor="let matchPoints of userPoints.allMatchPoints">
+                    <td>{{matchPoints.mid}}</td>
                     <td>{{matchPoints.opposition}}</td>
                     <td class="text-right">{{matchPoints.totalPoints.battingsPts}}</td>
                     <td class="text-right">{{matchPoints.totalPoints.bowlingPts}}</td>

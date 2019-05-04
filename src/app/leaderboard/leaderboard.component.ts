@@ -24,4 +24,14 @@ export class LeaderboardComponent implements OnInit {
       );
   }
 
+  togglePointsDetails(val) {
+    if(eval('this.' + val)) {
+      eval('this.' + val + '=' + false)
+    } else {
+      eval('this.' + val + '=' + true)
+    }
+
+    console.log(eval('this.' + val))
+  }
+
 }

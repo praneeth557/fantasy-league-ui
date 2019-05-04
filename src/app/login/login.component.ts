@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit, OnChanges {
   isRegisterSuccess:boolean = false;
   loginMessage:string;
   isLoginError:boolean = false;
+  isLoader: boolean = false;
 
   constructor(private loginService: LoginService,
               private cookieService: CookieService,
@@ -117,6 +118,7 @@ export class LoginComponent implements OnInit, OnChanges {
   }
 
   loginUser(loginForm: NgForm) {
+    this.isLoader = true;
     if (!loginForm.valid) {
       this.isLoginError = true;
       this.loginMessage = "Please fill all the required fields.";
@@ -131,6 +133,7 @@ export class LoginComponent implements OnInit, OnChanges {
     this.loginService.verifyUser(loginObj)
       .subscribe(
         (response:any) => {
+          this.isLoader = false;
           if(response && response.success) {
             this.cookieService.set( 'Token', response.token, 1/24 );
             this.cookieService.set( 'User-Context', response.username, 1/24 );
@@ -148,6 +151,7 @@ export class LoginComponent implements OnInit, OnChanges {
           }
         },
         (error) => {
+          this.isLoader = false;
           this.isLoginError = true;
           this.loginMessage = "Unable to login.";
         }
