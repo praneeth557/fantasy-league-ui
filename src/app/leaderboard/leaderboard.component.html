@@ -45,7 +45,6 @@
               <table class="table expanded-bc" *ngIf="userPoints.allMatchPoints">
                 <thead>
                   <tr>
-                    <th>Match ID</th>
                     <th>Match Against</th>
                     <th class="text-right">Batting Points</th>
                     <th class="text-right">Bowling Points</th>
@@ -55,7 +54,6 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let matchPoints of userPoints.allMatchPoints">
-                    <td>{{matchPoints.mid}}</td>
                     <td>{{matchPoints.opposition}}</td>
                     <td class="text-right">{{matchPoints.totalPoints.battingsPts}}</td>
                     <td class="text-right">{{matchPoints.totalPoints.bowlingPts}}</td>

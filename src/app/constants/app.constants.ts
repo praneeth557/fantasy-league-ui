@@ -14,4 +14,5 @@ export class AppConstants {
   SAVE_PLAYERS_SCORES_URL = "/api/player/savePlayersScores";
   GET_ALL_MATCH_POINTS_URL = "/api/match/getAllMatchPoints";
   GET_ALL_USER_MATCH_POINTS_URL = "/api/match/getAllUserMatchPoints";
+  SET_MATCH_STATUS_URL = "/api/match/changeMatchStatus";
 }

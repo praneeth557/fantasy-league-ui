@@ -63,4 +63,20 @@ export class UpdateScoresComponent implements OnInit, OnChanges {
     }
   }
 
+  changeMatchStatus(id, name, mid) {
+    let obj = {
+      id : id,
+      name : name.name,
+      value : parseInt(name.value),
+      mid : parseInt(mid.value)
+    };
+    this.homeService.setMatchStatus(obj)
+      .subscribe(
+        (response) => {
+          console.log(response)
+        },
+        (error) => console.log(error)
+      )
+  }
+
 }

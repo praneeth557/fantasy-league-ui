@@ -131,4 +131,11 @@ export class HomeService {
 
     return this.http.get(url, {headers: headers});
   }
+
+  setMatchStatus(matchObj) {
+    let headers = this.authorizationService.getHeadersObject();
+    let url = this.appConstants.APP_URL + this.appConstants.SET_MATCH_STATUS_URL;
+
+    return this.http.post(url, matchObj, {headers: headers});
+  }
 }
