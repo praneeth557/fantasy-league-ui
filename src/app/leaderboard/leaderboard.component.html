@@ -95,7 +95,7 @@
                   <th class="text-right">Fielding Points</th>
                   <th class="text-right">Total Points</th>
                 </tr>
-                <tr class="pointer" data-dismiss="modal" *ngFor="let matchPoints of matchPointsDetails.points">
+                <tr *ngFor="let matchPoints of matchPointsDetails.points">
                   <td>{{matchPoints.name}}</td>
                   <td>
                     {{matchPoints.role}}
@@ -107,7 +107,7 @@
                   <td class="text-right">{{matchPoints.fieldingPts}}</td>
                   <td class="text-right">{{matchPoints.totalPts}}</td>
                 </tr>
-                <tr class="pointer">
+                <tr>
                   <td></td>
                   <td><b>TOTAL</b></td>
                   <td class="text-right"><b>{{matchPointsDetails.totalPoints.battingsPts}}</b></td>
