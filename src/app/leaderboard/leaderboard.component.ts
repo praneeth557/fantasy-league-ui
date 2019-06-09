@@ -8,8 +8,8 @@ import { HomeService } from '../shared/home.service';
 })
 export class LeaderboardComponent implements OnInit {
 
-  leaderboardList = [];
-  matchPointsDetails = [];
+  leaderboardList:any[] = [];
+  matchPointsDetails:any[] = [];
 
   constructor(private homeService: HomeService) { }
 
