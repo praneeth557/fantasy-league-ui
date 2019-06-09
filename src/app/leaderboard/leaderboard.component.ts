@@ -34,12 +34,11 @@ export class LeaderboardComponent implements OnInit {
 
   }
 
-  showPlayersSelection(matchDetails:any) {
-    // matchDetails.points.forEach(point => {
-    //   point.pid
-    // });
-    matchDetails.points = matchDetails.points ? matchDetails.points : [];
-    this.matchPointsDetails = matchDetails;
-  }
+  // showPlayersSelection(matchDetails:any) {
+  //   // matchDetails.points.forEach(point => {
+  //   //   point.pid
+  //   // });
+  //   this.matchPointsDetails = matchDetails;
+  // }
 
 }

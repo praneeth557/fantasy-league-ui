@@ -50,7 +50,7 @@
                     <th class="text-right">Bowling Points</th>
                     <th class="text-right">Fielding Against</th>
                     <th class="text-right">Total Match Points</th>
-                    <th class="text-right">Players selected</th>
+                    <!--<th class="text-right">Players selected</th>-->
                   </tr>
                 </thead>
                 <tbody>
@@ -61,11 +61,11 @@
                     <td class="text-right" *ngIf="matchPoints.status == 3">{{matchPoints.totalPoints.fieldingPts}}</td>
                     <td class="text-right" *ngIf="matchPoints.status == 3">{{matchPoints.totalPoints.totalPts}}</td>
                     <td class="text-center" colspan="4" *ngIf="matchPoints.status != 3">Match yet to be played.</td>
-                    <td class="text-right">
-                      <a role="button" class="expandAnchor" data-toggle="modal" data-target="#detailSelectedPlayersView" (click)="showPlayersSelection(matchPoints)">
-                        <i class="glyphicon glyphicon-eye-open"></i>
-                      </a>
-                    </td>
+                    <!--<td class="text-right">-->
+                      <!--<a role="button" class="expandAnchor" data-toggle="modal" data-target="#detailSelectedPlayersView" (click)="showPlayersSelection(matchPoints)">-->
+                        <!--<i class="glyphicon glyphicon-eye-open"></i>-->
+                      <!--</a>-->
+                    <!--</td>-->
                   </tr>
                 </tbody>
               </table>
@@ -77,49 +77,49 @@
 
 
     <!-- Modal -->
-    <div class="modal" id="detailSelectedPlayersView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Selected Players Details</h4>
-          </div>
-          <div class="modal-body">
-            <div class="list-group">
-              <table class="table">
-                <tr>
-                  <th>Player Name</th>
-                  <th>Role</th>
-                  <th class="text-right">Batting Points</th>
-                  <th class="text-right">Bowling Points</th>
-                  <th class="text-right">Fielding Points</th>
-                  <th class="text-right">Total Points</th>
-                </tr>
-                <tr *ngFor="let matchPoints of matchPointsDetails.points">
-                  <td>{{matchPoints.name}}</td>
-                  <td>
-                    {{matchPoints.role}}
-                    <!--<i *ngIf="matchPoints.role == 'CAPTAIN'" class="glyphicon glyphicon-hand-up" data-toggle="tooltip" data-placement="bottom" title="batting, bowling & fielding points includes 2 times of its points"></i>-->
-                    <!--<i *ngIf="matchPoints.role == 'MV BATSMAN'" class="glyphicon glyphicon-hand-up" data-toggle="tooltip" data-placement="bottom" title="2 times of batting + 1 time of bowling & 1 time of fielding points"></i>-->
-                  </td>
-                  <td class="text-right">{{matchPoints.battingsPts}}</td>
-                  <td class="text-right">{{matchPoints.bowlingPts}}</td>
-                  <td class="text-right">{{matchPoints.fieldingPts}}</td>
-                  <td class="text-right">{{matchPoints.totalPts}}</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><b>TOTAL</b></td>
-                  <td class="text-right"><b>{{matchPointsDetails.totalPoints.battingsPts}}</b></td>
-                  <td class="text-right"><b>{{matchPointsDetails.totalPoints.bowlingPts}}</b></td>
-                  <td class="text-right"><b>{{matchPointsDetails.totalPoints.fieldingPts}}</b></td>
-                  <td class="text-right"><b>{{matchPointsDetails.totalPoints.totalPts}}</b></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!--<div class="modal" id="detailSelectedPlayersView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+      <!--<div class="modal-dialog modal-lg" role="document">-->
+        <!--<div class="modal-content">-->
+          <!--<div class="modal-header">-->
+            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+            <!--<h4 class="modal-title" id="myModalLabel">Selected Players Details</h4>-->
+          <!--</div>-->
+          <!--<div class="modal-body">-->
+            <!--<div class="list-group">-->
+              <!--<table class="table">-->
+                <!--<tr>-->
+                  <!--<th>Player Name</th>-->
+                  <!--<th>Role</th>-->
+                  <!--<th class="text-right">Batting Points</th>-->
+                  <!--<th class="text-right">Bowling Points</th>-->
+                  <!--<th class="text-right">Fielding Points</th>-->
+                  <!--<th class="text-right">Total Points</th>-->
+                <!--</tr>-->
+                <!--<tr *ngFor="let matchPoints of matchPointsDetails.points">-->
+                  <!--<td>{{matchPoints.name}}</td>-->
+                  <!--<td>-->
+                    <!--{{matchPoints.role}}-->
+                    <!--&lt;!&ndash;<i *ngIf="matchPoints.role == 'CAPTAIN'" class="glyphicon glyphicon-hand-up" data-toggle="tooltip" data-placement="bottom" title="batting, bowling & fielding points includes 2 times of its points"></i>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i *ngIf="matchPoints.role == 'MV BATSMAN'" class="glyphicon glyphicon-hand-up" data-toggle="tooltip" data-placement="bottom" title="2 times of batting + 1 time of bowling & 1 time of fielding points"></i>&ndash;&gt;-->
+                  <!--</td>-->
+                  <!--<td class="text-right">{{matchPoints.battingsPts}}</td>-->
+                  <!--<td class="text-right">{{matchPoints.bowlingPts}}</td>-->
+                  <!--<td class="text-right">{{matchPoints.fieldingPts}}</td>-->
+                  <!--<td class="text-right">{{matchPoints.totalPts}}</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                  <!--<td></td>-->
+                  <!--<td><b>TOTAL</b></td>-->
+                  <!--<td class="text-right"><b>{{matchPointsDetails.totalPoints.battingsPts}}</b></td>-->
+                  <!--<td class="text-right"><b>{{matchPointsDetails.totalPoints.bowlingPts}}</b></td>-->
+                  <!--<td class="text-right"><b>{{matchPointsDetails.totalPoints.fieldingPts}}</b></td>-->
+                  <!--<td class="text-right"><b>{{matchPointsDetails.totalPoints.totalPts}}</b></td>-->
+                <!--</tr>-->
+              <!--</table>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </div>
