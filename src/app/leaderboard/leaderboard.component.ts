@@ -9,7 +9,7 @@ import { HomeService } from '../shared/home.service';
 export class LeaderboardComponent implements OnInit {
 
   leaderboardList:any[] = [];
-  matchPointsDetails:any;
+  matchPointsDetails;
 
   constructor(private homeService: HomeService) { }
 
@@ -19,7 +19,6 @@ export class LeaderboardComponent implements OnInit {
       .subscribe(
         (response: any) => {
           if(response && response.success) {
-            console.log(response);
             this.leaderboardList = response.points;
           }
         }
@@ -33,13 +32,13 @@ export class LeaderboardComponent implements OnInit {
       eval('this.' + val + '=' + true)
     }
 
-    console.log(eval('this.' + val))
   }
 
-  showPlayersSelection(matchDetails: any) {
+  showPlayersSelection(matchDetails:any) {
     // matchDetails.points.forEach(point => {
     //   point.pid
     // });
+    matchDetails.points = matchDetails.points ? matchDetails.points : [];
     this.matchPointsDetails = matchDetails;
   }
 
