@@ -19,6 +19,7 @@ export class LeaderboardComponent implements OnInit {
       .subscribe(
         (response: any) => {
           if(response && response.success) {
+            console.log(response);
             this.leaderboardList = response.points;
           }
         }
