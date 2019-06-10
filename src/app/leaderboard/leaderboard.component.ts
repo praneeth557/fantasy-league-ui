@@ -9,7 +9,7 @@ import { HomeService } from '../shared/home.service';
 export class LeaderboardComponent implements OnInit {
 
   leaderboardList:any[] = [];
-  matchPointsDetails:any[] = [];
+  matchPointsDetails;
 
   constructor(private homeService: HomeService) { }
 
