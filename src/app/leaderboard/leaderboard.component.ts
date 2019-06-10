@@ -35,11 +35,11 @@ export class LeaderboardComponent implements OnInit {
     console.log(eval('this.' + val))
   }
 
-  showPlayersSelection(matchDetails) {
+  //showPlayersSelection(matchDetails) {
     // matchDetails.points.forEach(point => {
     //   point.pid
     // });
-    this.matchPointsDetails = matchDetails;
-  }
+    //this.matchPointsDetails = matchDetails;
+  //}
 
 }
