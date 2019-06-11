@@ -32,7 +32,7 @@ import { HomeService } from '../shared/home.service';
 export class LeaderboardComponent implements OnInit {
 
   leaderboardList:any[] = [];
-  matchPointsDetails = {};
+  matchPointsDetails = {points:[], totalPoints:{battingsPts:0, bowlingPts:0, fieldingPts:0, totalPts:0}};
 
   constructor(private homeService: HomeService) { }
 
@@ -57,7 +57,7 @@ export class LeaderboardComponent implements OnInit {
 
   }
 
-  showPlayersSelection(matchDetails:{}) {
+  showPlayersSelection(matchDetails) {
     // matchDetails.points.forEach(point => {
     //   point.pid
     // });
