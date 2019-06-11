@@ -6,10 +6,33 @@ import { HomeService } from '../shared/home.service';
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.css']
 })
+
+// export interface Points {
+//   role? : string,
+//   battingPts : number,
+//   bowlingPts : number,
+//   fieldingPts : number,
+//   mid? : number,
+//   otherPts? : number,
+//   pid? : number,
+//   ptid? : number,
+//   totalPts : number,
+//   name? : string
+// }
+//
+// export interface MatchPointsDetails {
+//   matchDate : string,
+//   mid : number,
+//   opposition : string,
+//   status : number,
+//   points : Points[],
+//   totalPoints : Points
+// }
+
 export class LeaderboardComponent implements OnInit {
 
   leaderboardList:any[] = [];
-  matchPointsDetails;
+  matchPointsDetails = {};
 
   constructor(private homeService: HomeService) { }
 
@@ -34,11 +57,11 @@ export class LeaderboardComponent implements OnInit {
 
   }
 
-  // showPlayersSelection(matchDetails:any) {
-  //   // matchDetails.points.forEach(point => {
-  //   //   point.pid
-  //   // });
-  //   this.matchPointsDetails = matchDetails;
-  // }
+  showPlayersSelection(matchDetails:{}) {
+    // matchDetails.points.forEach(point => {
+    //   point.pid
+    // });
+    this.matchPointsDetails = matchDetails;
+  }
 
 }
